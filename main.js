@@ -40,11 +40,11 @@ const scoreTable={
 // 만약 clickButton을 5번 '연속' 호출하면 인터벌이 1,2,3,4 계속 덮어씌우다가 5번만 intervalId에 저장
 // 그 다음에 버튼을 클릭하면 마지막 5번만 취소됨(1,2,3,4번은 남아서 계속 돌고있게됨)
 // 그래서 clearInterval(intervalId) 변수를 한번 더  추가 해주는 거임 (='플래그 변수'의 역할)
-
+let scoreNum =0;
 const clickButton = ()=>{
     clearInterval(intervalId);
     //점수 계산 및 화면 표시
-    const myChoice = event.target.id === '바위'
+    const myChoice = event.target.textContent === '바위'
         ?'바위'
         : event.target.textContent === '가위'
             ? '가위'
@@ -52,20 +52,25 @@ const clickButton = ()=>{
     const myScore = scoreTable[myChoice];
     const computerScore = scoreTable[computerChoice];
     const diff = myScore - computerScore;
+    let message;
+
     if([2,-1].includes(diff)){
-        console.log('승리');
+        scoreNum+=1;
+        message ='Win';
     }
     else if ([-2,1].includes(diff)){
-        console.log('패배');
+        scoreNum-=1;
+        message ='Lose';
     }
     else if ([0].includes(diff)) {
-        console.log('무승부');
+        message ='Draw';
     }
+    score.textContent = `${message} 총: ${scoreNum}점`;
 
     setTimeout(()=>{
         clearInterval(intervalId);
         intervalId= setInterval(changeComputerHand,50);
-    },5000);
+    },3000);
 };
 
 가위.addEventListener('click',clickButton);
