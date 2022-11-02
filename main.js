@@ -32,10 +32,13 @@ const changeComputerHand=()=>{
 let intervalId = setInterval(changeComputerHand,50);
 
 // 버튼 클릭하면 컴퓨터가 선택 1초간 보여주는 이벤트
+// 만약 clickButton을 5번 '연속' 호출하면 인터벌이 1,2,3,4 계속 덮어씌우다가 5번만 intervalId에 저장
+// 그 다음에 버튼을 클릭하면 마지막 5번만 취소됨(1,2,3,4번은 남아서 계속 돌고있게됨)
 const clickButton = ()=>{
     clearInterval(intervalId);
     //점수 계산 및 화면 표시
     setTimeout(()=>{
+        clearInterval(intervalId);
         intervalId= setInterval(changeComputerHand,50);
     },1000);
 };
