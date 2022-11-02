@@ -52,13 +52,13 @@ const clickButton = ()=>{
     const myScore = scoreTable[myChoice];
     const computerScore = scoreTable[computerChoice];
     const diff = myScore - computerScore;
-    if(diff===2 || diff === -1){
+    if([2,-1].includes(diff)){
         console.log('승리');
     }
-    else if (diff === -1 || diff ===1){
+    else if ([-2,1].includes(diff)){
         console.log('패배');
     }
-    else if (diff===0) {
+    else if ([0].includes(diff)) {
         console.log('무승부');
     }
 
