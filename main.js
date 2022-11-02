@@ -44,9 +44,9 @@ let scoreNum =0;
 const clickButton = ()=>{
     clearInterval(intervalId);
     //점수 계산 및 화면 표시
-    const myChoice = event.target.textContent === '바위'
+    const myChoice = event.target.id === '바위'
         ?'바위'
-        : event.target.textContent === '가위'
+        : event.target.id === '가위'
             ? '가위'
             : '보'
     const myScore = scoreTable[myChoice];
@@ -56,21 +56,22 @@ const clickButton = ()=>{
 
     if([2,-1].includes(diff)){
         scoreNum+=1;
-        message ='Win';
+        message ='👏 Win 🤩 ';
     }
     else if ([-2,1].includes(diff)){
         scoreNum-=1;
-        message ='Lose';
+        message ='😡 Lose 👎';
     }
     else if ([0].includes(diff)) {
-        message ='Draw';
+        message ='🙌 Draw';
     }
-    score.textContent = `${message} 총: ${scoreNum}점`;
+    score.textContent = 
+    `${message} Total: ${scoreNum} points`;
 
     setTimeout(()=>{
         clearInterval(intervalId);
         intervalId= setInterval(changeComputerHand,50);
-    },3000);
+    },5000);
 };
 
 가위.addEventListener('click',clickButton);
