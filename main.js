@@ -14,7 +14,7 @@ computer.style.background = `url(${IMG_URL})0 0`;
 computer.style.backgroundSize ='auto 200px'; //이렇게 하면 이미지 사이즈게 높이200px에 맞춰서 '자동으로' 맞춰짐
 
 let computerChoice ='가위x'; //객체를 굳이 지정하지 않아도 읽기 쉽게 코딩가능
-setInterval(()=>{
+const changeComputerHand=()=>{
     if(computerChoice === '가위x'){ //'가위' 일때
         computerChoice = '바위x';        
     }
@@ -26,7 +26,20 @@ setInterval(()=>{
     else if (computerChoice === '보x'){//'보' 일때
         computerChoice = '가위x'  ;        
     }  
-    
         computer.style.background = `url(${IMG_URL}) ${rspX[computerChoice]} 0`;
-        computer.style.backgroundSize ='auto 200px'; 
-},50);
+        computer.style.backgroundSize ='auto 200px';
+};
+let intervalId = setInterval(changeComputerHand,50);
+
+// 버튼 클릭하면 컴퓨터가 선택 1초간 보여주는 이벤트
+const clickButton = ()=>{
+    clearInterval(intervalId);
+    //점수 계산 및 화면 표시
+    setTimeout(()=>{
+        intervalId= setInterval(changeComputerHand,50);
+    },1000);
+};
+
+가위.addEventListener('click',clickButton);
+바위.addEventListener('click',clickButton);
+보.addEventListener('click',clickButton);
